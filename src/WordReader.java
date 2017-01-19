@@ -19,7 +19,7 @@ public class WordReader {
             String line = br.readLine();
 
             while (line != null) {
-                words.add(line);
+                words.add(removeSpaces(line));
                 line = br.readLine();
             }
 
@@ -29,4 +29,8 @@ public class WordReader {
         }
         return words.toArray(new String[words.size()]);
     }
+    private String removeSpaces(String word) {
+        return word.replace("\\s+", "");
+    }
+
 }

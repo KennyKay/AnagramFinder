@@ -40,8 +40,7 @@ public class AFBase extends AnagramFinder {
 	}
 
 
-	@Override
-	protected boolean isAnagram(char[] word, char[] anagram) {
+	private boolean isAnagram(char[] word, char[] anagram) {
 
 		boolean found;
 		for (char w : word) {

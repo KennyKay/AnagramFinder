@@ -47,20 +47,4 @@ public abstract class AnagramFinder {
 			String[] words,
 			String[] dict
 	);
-
-
-	/**
-	 * Returns whether the {@code anagram} is an anagram of the word {@code
-	 * word}.
-	 *
-	 * @param word    The word to check.
-	 * @param anagram The anagram to confirm.
-	 *
-	 * @return {@code true} if the anagram is confirmed, {@code false},
-	 * otherwise.
-	 */
-	protected abstract boolean isAnagram(
-			char[] word,
-			char[] anagram
-	);
 }

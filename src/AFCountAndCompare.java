@@ -40,8 +40,7 @@ public class AFCountAndCompare extends AnagramFinder {
 	}
 
 
-	@Override
-	protected boolean isAnagram(char[] word, char[] anagram) {
+	private boolean isAnagram(char[] word, char[] anagram) {
 
 		reset();
 

@@ -19,20 +19,17 @@ public class AnagramFinderKenny extends AnagramFinder {
         char[][] sortedWords = new char[wordsLength][];
         char[][] sortedDict = new char[dictionaryWordsLength][];
 
-        for (int i = 0; i < wordsLength; i++) {
-            sortedWords[i] = removeSpaces(words[i]).toCharArray();
-            Arrays.sort(sortedWords[i]);
-        }
-
-        for (int i = 0; i < dictionaryWordsLength; i++)
-            dict[i] = removeSpaces(dict[i]);
-
         int wordAnagramCount;
         for (int i = 0; i < wordsLength; i++) {
             wordAnagramCount = 0;
             for (int j = 0; j < dictionaryWordsLength; j++){
-                if(sortedWords[i].length != dict[j].length())
+                if(words[i].length() != dict[j].length())
                     continue;
+
+                if(sortedWords[i] == null){
+                    sortedWords[i] = words[i].toCharArray();
+                    Arrays.sort(sortedWords[i]);
+                }
 
                 if(sortedDict[j] == null){
                     sortedDict[j] = dict[j].toCharArray();
@@ -50,12 +47,9 @@ public class AnagramFinderKenny extends AnagramFinder {
         return result;
     }
 
-    private String removeSpaces(String word) {
-        return word.replace(" ", "");
-    }
 
-    @Override
-    protected boolean isAnagram(char[] word, char[] anagram) {
+
+    private boolean isAnagram(char[] word, char[] anagram) {
         for(int i = word.length - 1; i >= 0; i--)
             if(word[i] != anagram[i])
                 return false;

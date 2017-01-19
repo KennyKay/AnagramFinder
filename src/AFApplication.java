@@ -17,7 +17,7 @@ public class AFApplication {
 //				AnagramFinder anagramFinder = new AFBase(meter);
 		//		AnagramFinder anagramFinder = new AFCountAndCompare(meter);
 		//		AnagramFinder anagramFinder = new AnagramFinderKenny(meter);
-		AnagramFinder anagramFinder = new AFBase(meter);
+		AnagramFinder anagramFinder = new AnagramFinderKenny(meter);
 
 		Map<String, Integer> anagrams;
 
