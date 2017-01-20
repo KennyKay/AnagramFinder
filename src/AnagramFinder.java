@@ -1,4 +1,5 @@
 import java.util.Dictionary;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -43,7 +44,7 @@ public abstract class AnagramFinder {
 	 * @return A {@link Map} of the {@code words} and the number of anagram
 	 * found in the {@code dict} for each word.
 	 */
-	public abstract Map<String, Integer> findAnagrams(
+	public abstract int[] findAnagrams(
 			String[] words,
 			String[] dict
 	);

@@ -1,4 +1,6 @@
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -17,12 +19,13 @@ public class AFCountAndCompare extends AnagramFinder {
 
 
 	@Override
-	public Map<String, Integer> findAnagrams(String[] words, String[] dict) {
+	public int[] findAnagrams(String[] words, String[] dict) {
 
-		Map<String, Integer> result = new HashMap<>();
+        int[] result = new int[words.length];
 
 		this.meter.start();
-		for (String w : words) {
+		for (int i = 0; i < words.length; i++) {
+			String w = words[i];
 
 			int count = 0;
 
@@ -31,7 +34,7 @@ public class AFCountAndCompare extends AnagramFinder {
 				char[] anagram = a.replaceAll("\\s+", "").toCharArray();
 
 				if (isAnagram(word, anagram)) count++;
-				result.put(w, count);
+				result[i] = count;
 			}
 		}
 		this.meter.stop();

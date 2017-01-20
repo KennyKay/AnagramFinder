@@ -17,9 +17,9 @@ public class AFApplication {
 //				AnagramFinder anagramFinder = new AFBase(meter);
 		//		AnagramFinder anagramFinder = new AFCountAndCompare(meter);
 		//		AnagramFinder anagramFinder = new AnagramFinderKenny(meter);
-		AnagramFinder anagramFinder = new AnagramFinderKenny(meter);
+		AnagramFinder anagramFinder = new AFBase(meter);
 
-		Map<String, Integer> anagrams;
+		int[] anagrams;
 
 		for (int i = 0; i <= TRIES; i++) {
 			anagramFinder.findAnagrams(words, dict);
@@ -31,11 +31,11 @@ public class AFApplication {
 		anagrams = anagramFinder.findAnagrams(words, dict);
 
 		int total = 0;
-		for (Map.Entry<String, Integer> anagram : anagrams.entrySet()) {
-			String line = "Il y a " + anagram.getValue() + " anagrammes du mot " + anagram.getKey();
+		for (int i = 0; i < anagrams.length; i++) {
+			String line = "Il y a " + anagrams[i] + " anagrammes du mot " + words[i];
 			System.out.println(line);
 
-			total += anagram.getValue();
+			total += anagrams[i];
 		}
 
 		System.out.println("Il y a un total de " + total + " anagrammes");

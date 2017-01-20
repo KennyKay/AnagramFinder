@@ -1,6 +1,4 @@
-import java.util.Dictionary;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  *
@@ -14,26 +12,27 @@ public class AFBase extends AnagramFinder {
 
 
 	@Override
-	public Map<String, Integer> findAnagrams(String[] words, String[] dict) {
+	public int[] findAnagrams(String[] words, String[] dict) {
 
-		Map<String, Integer> result = new HashMap<>();
+        int[] result = new int[words.length];
 
 		this.meter.start();
-		for (String w : words) {
+        for (int i = 0; i < words.length; i++) {
+            String w = words[i];
 
-			int count = 0;
+            int count = 0;
 
-			for (String a : dict) {
-				String word = w.replaceAll(" ", "");
-				String anagram = a.replaceAll(" ", "");
+            for (String a : dict) {
+                String word = w.replaceAll(" ", "");
+                String anagram = a.replaceAll(" ", "");
 
-				if (word.length() == anagram.length()
-						&& isAnagram(word.toCharArray(), anagram.toCharArray())) {
-					count++;
-				}
-				result.put(w, count);
-			}
-		}
+                if (word.length() == anagram.length()
+                        && isAnagram(word.toCharArray(), anagram.toCharArray())) {
+                    count++;
+                }
+                result[i] = count;
+            }
+        }
 		this.meter.stop();
 
 		return result;

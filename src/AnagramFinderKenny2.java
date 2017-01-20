@@ -1,4 +1,6 @@
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.IntStream;
 
@@ -11,9 +13,9 @@ public class AnagramFinderKenny2 extends AnagramFinder {
 
 
 	@Override
-	public Map<String, Integer> findAnagrams(String[] words, String[] dict) {
+	public int[] findAnagrams(String[] words, String[] dict) {
 
-		Map<String, Integer> result = new HashMap<>();
+        int[] result = new int[words.length];
 		this.meter.start();
 
 		int wordsLength = words.length;
@@ -38,7 +40,7 @@ public class AnagramFinderKenny2 extends AnagramFinder {
                     wordAnagramCount++;
             }
 
-			result.put(words[i], wordAnagramCount);
+			result[i] = wordAnagramCount;
 		});
 		this.meter.stop();
 		return result;
