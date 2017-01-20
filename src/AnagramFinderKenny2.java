@@ -1,5 +1,6 @@
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.IntStream;
 
 public class AnagramFinderKenny2 extends AnagramFinder {
 
@@ -21,9 +22,8 @@ public class AnagramFinderKenny2 extends AnagramFinder {
 		Map<Character, Integer>[] sortedWords = new Map[wordsLength];
 		Map<Character, Integer>[] sortedDict = new Map[dictionaryWordsLength];
 
-		int wordAnagramCount;
-		for (int i = 0; i < wordsLength; i++) {
-			wordAnagramCount = 0;
+		IntStream.range(0, wordsLength).parallel().forEach(i -> {
+			int wordAnagramCount = 0;
 			for (int j = 0; j < dictionaryWordsLength; j++){
                 if(words[i].length() != dict[j].length())
                     continue;
@@ -39,7 +39,7 @@ public class AnagramFinderKenny2 extends AnagramFinder {
             }
 
 			result.put(words[i], wordAnagramCount);
-		}
+		});
 		this.meter.stop();
 		return result;
 	}
