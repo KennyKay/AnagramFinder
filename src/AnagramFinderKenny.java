@@ -28,13 +28,15 @@ public class AnagramFinderKenny extends AnagramFinder {
                     continue;
 
                 if(sortedWords[i] == null){
-                    sortedWords[i] = words[i].toCharArray();
-                    Arrays.sort(sortedWords[i]);
+                    char[] temp = words[i].toCharArray();
+                    Arrays.sort(temp);
+                    sortedWords[i] = temp;
                 }
 
                 if(sortedDict[j] == null){
-                    sortedDict[j] = dict[j].toCharArray();
-                    Arrays.sort(sortedDict[j]);
+                    char[] temp = dict[j].toCharArray();
+                    Arrays.sort(temp);
+                    sortedDict[j] = temp;
                 }
 
                 if (isAnagram(sortedWords[i], sortedDict[j]))
