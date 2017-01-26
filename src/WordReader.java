@@ -30,7 +30,7 @@ public class WordReader {
         return words.toArray(new String[words.size()]);
     }
     private String removeSpaces(String word) {
-        return word.replace("\\s+", "");
+        return word.replace(" ", "");
     }
 
 }

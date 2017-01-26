@@ -1,23 +1,18 @@
-import java.util.*;
+import java.util.Arrays;
 import java.util.stream.IntStream;
 
 public class AnagramFinderKenny extends AnagramFinder {
 
 
-    public AnagramFinderKenny(PerformanceMeter meter) {
-        super(meter);
-    }
 
     @Override
-    public int[] findAnagrams(String[] words, String[] dict) {
+    public void findAnagrams(String[] words, String[] dict, int[] result) {
 
-        int[] result = new int[words.length];
-        this.meter.start();
         int wordsLength = words.length;
         int dictionaryWordsLength = dict.length;
 
-        char[][] sortedWords = new char[wordsLength][];
-        char[][] sortedDict = new char[dictionaryWordsLength][];
+        int[][] sortedWords = new int[wordsLength][];
+        int[][] sortedDict = new int[dictionaryWordsLength][];
 
 
         IntStream.range(0, wordsLength).parallel().forEach(i -> {
@@ -28,35 +23,37 @@ public class AnagramFinderKenny extends AnagramFinder {
                     continue;
 
                 if(sortedWords[i] == null){
-                    char[] temp = words[i].toCharArray();
-                    Arrays.sort(temp);
-                    sortedWords[i] = temp;
+                    if(words[i].length() < 36){
+                        int[] temp = toIntArray(words[i]);
+                        Arrays.sort(temp);
+                        sortedWords[i] = temp;
+                    }
+                    else
+                        sortedWords[i] = AnagramFinderCount.getCharCount(words[i]);
                 }
 
                 if(sortedDict[j] == null){
-                    char[] temp = dict[j].toCharArray();
-                    Arrays.sort(temp);
-                    sortedDict[j] = temp;
+                    if(dict[j].length() < 36){
+                        int[] temp = toIntArray(dict[j]);
+                        Arrays.sort(temp);
+                        sortedDict[j] = temp;
+                    }
+                    else
+                        sortedDict[j] = AnagramFinderCount.getCharCount(dict[j]);
                 }
 
-                if (isAnagram(sortedWords[i], sortedDict[j]))
+                if (AnagramFinderCount.isAnagram(sortedWords[i], sortedDict[j]))
                     wordAnagramCount++;
             }
 
             result[i] = wordAnagramCount;
         });
-
-        this.meter.stop();
-        return result;
     }
 
-
-
-    private boolean isAnagram(char[] word, char[] anagram) {
-        for(int i = word.length - 1; i >= 0; i--)
-            if(word[i] != anagram[i])
-                return false;
-
-        return true;
+    private int[] toIntArray(String word) {
+        int[] array = new int[word.length()];
+        for (int i = 0; i < word.length(); i++)
+            array[i] = Character.getNumericValue(word.charAt(i));
+        return array;
     }
 }
